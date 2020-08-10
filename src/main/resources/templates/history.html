@@ -1,0 +1,70 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>История конвертации валюты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+<div class="d-flex justify-content-center align-items-center container mt-2">
+  <nav class="nav nav-pills nav-fill">
+    <a class="nav-item nav-link" th:href="@{/convert}">Конвертер</a>
+    <a class="nav-item nav-link active" th:href="@{/history}">История</a>
+  </nav>
+</div>
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="row text-center">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="jumbotron d-flex align-items-center">
+                <form class="form-signin" action="/history/search" method="get">
+
+                    <h1 class="h3 mb-3 font-weight-normal">История</h1>
+
+                    <div class="form-inline">
+                        <input type="date" class="form-control" name="date">
+                        <div class="form-block mt-2">
+                            <select id="inputOrigin" class="form-control" name="originCurrency">
+                                <option value="" hidden>Исходная валюта</option>
+                                <option th:each="el : ${currency}" th:value="${el.charCode}"><span th:text="${el.charCode}"/> (<span th:text="${el.name}"/>)</option>
+                            </select>
+                            <select id="inputTarget" class="form-control ml-4" name="targetCurrency">
+                                <option value="" hidden>Получаемая валюта</option>
+                                <option th:each="el : ${currency}" th:value="${el.charCode}"><span th:text="${el.charCode}"/> (<span th:text="${el.name}"/>)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <table class="table table-bordered mt-3">
+                      <thead>
+                        <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Исходная валюта</th>
+                          <th scope="col">Целевая валюта</th>
+                          <th scope="col">Исходная сумма</th>
+                          <th scope="col">Получаемая сумма</th>
+                          <th scope="col">Дата</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        <tr th:each="el, state : ${allRecords}">
+                          <th scope="row" th:text="${state.count}"></th>
+                          <td th:text="${el.originCurrency}"></td>
+                          <td th:text="${el.targetCurrency}"></td>
+                          <td th:text="${el.originSum}"></td>
+                          <td th:text="${el.targetSum}"></td>
+                          <td th:text="${el.date}"></td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                    <button class="btn btn-lg btn-primary mt-4" type="submit">Поиск</button>
+
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

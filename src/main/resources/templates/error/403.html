@@ -1,0 +1,26 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Сервис конвертации валюты</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+</head>
+<body>
+
+<div class="d-flex justify-content-center align-items-center container">
+    <div class="row text-center">
+        <div class="my-3 p-3 bg-white rounded shadow-sm">
+            <div class="jumbotron d-flex align-items-center">
+                <div class="starter-template">
+                    <h1 class="h3 mb-3 font-weight-normal">403 - Access is denied</h1>
+                    <div th:inline="text">Hello '[[${#httpServletRequest.remoteUser}]]',
+                        you do not have permission to access this page.</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
