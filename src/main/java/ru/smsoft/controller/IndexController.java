@@ -5,8 +5,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import ru.smsoft.service.ParsingService;
 
-import java.time.LocalDate;
-
 @Controller
 public class IndexController {
     private final ParsingService parsingService;
@@ -16,12 +14,11 @@ public class IndexController {
     }
 
     /**
-     * При запуске - парсинг текущей даты и даты, 5 днями раньше
+     * При запуске - парсинг текущей даты
      */
     @RequestMapping("/")
     public String index() {
         parsingService.parseByCurrentDate();
-        parsingService.parseByDate(LocalDate.now().minusDays(5));
         return "index";
     }
 

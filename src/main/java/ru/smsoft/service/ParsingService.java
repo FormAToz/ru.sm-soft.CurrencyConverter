@@ -1,6 +1,7 @@
 package ru.smsoft.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.smsoft.handler.XMLHandler;
 
@@ -15,7 +16,8 @@ import java.time.format.DateTimeFormatter;
  */
 @Service
 public class ParsingService {
-    private final String URI = "http://www.cbr.ru/scripts/XML_daily.asp";
+    @Value("${currencyUrl}")
+    private String URI;
     @Autowired
     private CourseService courseService;
     @Autowired
@@ -23,11 +25,6 @@ public class ParsingService {
 
     public void parseByCurrentDate() {
         parse(URI);
-    }
-
-    public void parseByDate(LocalDate date) {
-        String dateQuery = "?date_req=" + date.format(DateTimeFormatter.ofPattern("dd/MM/yyyy"));
-        parse(URI + dateQuery);
     }
 
     private void parse(String uri) {

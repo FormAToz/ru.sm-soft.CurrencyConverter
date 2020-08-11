@@ -45,7 +45,7 @@ public class CurrencyService {
         double targetValue = courseService.getActualCourseByCurrencyCharCode(targetCharCode).getValue();
         double originSum = Double.parseDouble(originCurrencySum);
         // Конвертация
-        double relationPercent = (originValue * originSum) / (targetValue * originSum);
+        double relationPercent = originValue / targetValue;
         double targetSum = originSum * relationPercent;
 
         return new BigDecimal(targetSum).setScale(4, RoundingMode.HALF_UP).doubleValue();
